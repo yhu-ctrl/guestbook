@@ -12,27 +12,31 @@
 
 <body>
     <div class="container">
-        <h3>登录</h3>
-        <form method="GET">
-            <div class="row">
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">account_circle</i>
-                    <input type="text" name="name" id="name" class="validate">
-                    <label for="name">用户名:</label>
-                </div>
+        <div class="row">
+            <div class="col s6 offset-s3">
+                <h3>登录</h3>
+                <form method="GET">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input type="text" name="name" id="name" class="validate">
+                            <label for="name">用户名:</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">lock</i>
+                            <input type="text" name="passwd" id="passwd" class="validate">
+                            <label for="passwd">密码:</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input type="submit" class="btn-large" value="登录">
+                        <a href="reg.html"><button class="btn-large">注册</button></a>
+                    </div>
+                </form>
             </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">lock</i>
-                    <input type="text" name="passwd" id="passwd" class="validate">
-                    <label for="passwd">密码:</label>
-                </div>
-            </div>
-            <div class="row">
-                <input type="submit" class="btn-large" value="登录">
-                <a href="reg.html"><button class="btn-large">注册</button></a>
-            </div>
-        </form>
+        </div>
     </div>
 
     <script src="js/materialize.min.js"></script>

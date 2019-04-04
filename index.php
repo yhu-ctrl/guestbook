@@ -32,7 +32,7 @@
                     </div>
                     <div class="row">
                         <button type="submit" class="btn-large">登录</button>
-                        <a href="reg.html"><button class="btn-large">注册</button></a>
+                        <a href="reg.php" class="btn-large">注册</a>
                     </div>
                 </form>
             </div>

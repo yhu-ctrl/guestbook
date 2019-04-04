@@ -31,8 +31,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <button type="submit" class="btn-large">登录</button>
-                        <a href="reg.php" class="btn-large">注册</a>
+                        <button type="submit" class="btn">登录</button>
+                        <a href="reg.php" class="btn">注册</a>
                     </div>
                 </form>
             </div>

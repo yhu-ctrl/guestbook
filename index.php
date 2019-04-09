@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">lock</i>
-                    <input type="text" name="passwd" id="passwd" class="validate">
+                    <input type="password" name="passwd" id="passwd" class="validate">
                     <label for="passwd">密码:</label>
                 </div>
             </div>

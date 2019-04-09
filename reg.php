@@ -24,14 +24,14 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">lock</i>
-                    <input type="text" name="passwd1" id="passwd1" class="validate">
+                    <input type="password" name="passwd1" id="passwd1" class="validate">
                     <label for="passwd1">密码:</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">lock_outline</i>
-                    <input type="text" name="passwd2" id="passwd2" class="validate">
+                    <input type="password" name="passwd2" id="passwd2" class="validate">
                     <label for="passwd2">确认密码:</label>
                 </div>
             </div>

@@ -1,5 +1,4 @@
 <?php
-require_once('config.php');
 $username = $_POST['name'];
 $password = $_POST['passwd'];
 
@@ -8,8 +7,9 @@ if(!$username)
 if(!$password)
     exit('<script>alert("请输入密码!");history.back();</script>');
 
+require_once('config.php');
 $sql = "SELECT username, password FROM userlist WHERE username = '$username'";
-
+$result = $db->query($sql);
 if ($result->num_rows === 0)
     exit('<script>alert("该用户不存在!");history.back();</script>');
 $user = $result->fetch_assoc();

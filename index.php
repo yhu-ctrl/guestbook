@@ -13,7 +13,7 @@
 <body>
     <div class="container">
         <h3>登录</h3>
-        <form method="POST">
+        <form action="login.php" method="POST">
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">account_circle</i>

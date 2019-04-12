@@ -1,23 +1,6 @@
-/*
-Navicat MySQL Data Transfer
+CREATE DATABASE IF NOT EXISTS guestbook;
+USE guestbook;
 
-Source Server         : localhost_3306
-Source Server Version : 50720
-Source Host           : localhost:3306
-Source Database       : guestbook1
-
-Target Server Type    : MYSQL
-Target Server Version : 50720
-File Encoding         : 65001
-
-Date: 2019-03-22 14:06:14
-*/
-
-SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for chart
--- ----------------------------
 DROP TABLE IF EXISTS `chart`;
 CREATE TABLE `chart` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
@@ -25,15 +8,8 @@ CREATE TABLE `chart` (
   `content` text,
   `addtime` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+);
 
--- ----------------------------
--- Records of chart
--- ----------------------------
-
--- ----------------------------
--- Table structure for guestbook
--- ----------------------------
 DROP TABLE IF EXISTS `guestbook`;
 CREATE TABLE `guestbook` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
@@ -44,11 +20,8 @@ CREATE TABLE `guestbook` (
   `active` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
+);
 
--- ----------------------------
--- Records of guestbook
--- ----------------------------
 INSERT INTO `guestbook` VALUES ('1', '2', '1111', '1369134008', '127.0.0.1', '0');
 INSERT INTO `guestbook` VALUES ('2', '2', '沈大高速', '1369134061', '127.0.0.1', '0');
 INSERT INTO `guestbook` VALUES ('3', '2', '考虑好了', '1369134488', '127.0.0.1', '0');
@@ -91,9 +64,6 @@ INSERT INTO `guestbook` VALUES ('41', '3', '123', '1524808874', '127.0.0.1', '0'
 INSERT INTO `guestbook` VALUES ('42', '3', '11111', '1525242250', '127.0.0.1', '0');
 INSERT INTO `guestbook` VALUES ('43', '3', 'aaa', '1525245578', '127.0.0.1', '0');
 
--- ----------------------------
--- Table structure for userlist
--- ----------------------------
 DROP TABLE IF EXISTS `userlist`;
 CREATE TABLE `userlist` (
   `uid` int(20) NOT NULL AUTO_INCREMENT,
@@ -110,11 +80,9 @@ CREATE TABLE `userlist` (
   `charttime` int(11) DEFAULT '0',
   `getcharttime` int(11) DEFAULT '0',
   PRIMARY KEY (`uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
+);
 
--- ----------------------------
--- Records of userlist
--- ----------------------------
+
 INSERT INTO `userlist` VALUES ('1', 'admin', 'admin', 'admin', 'null', '0', '127.0.0.1', '0', '127.0.0.1', '0', '0', '0', '0');
 INSERT INTO `userlist` VALUES ('2', 'admin1', 'e3ceb5881a0a1fdaad01296d7554868d', '111111', 'uploadfile/136979696849.jpg', '1367980003', '127.0.0.1', '1369796903', '127.0.0.1', '0', '0', '0', '0');
 INSERT INTO `userlist` VALUES ('3', 'jeky1', '96e79218965eb72c92a549dd5a330112', 'leo', './uploads/2018/04/201804121710537259.png', '1368584269', '127.0.0.1', '1369140317', '127.0.0.1', '0', '0', '1525413707', '1525413707');

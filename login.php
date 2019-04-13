@@ -6,9 +6,10 @@ if(!$username)
     exit('<script>alert("请输入用户名!");history.back();</script>');
 if(!$password)
     exit('<script>alert("请输入密码!");history.back();</script>');
+$password = md5($password);
 
 require_once('config.php');
-$sql = "SELECT username, password FROM userlist WHERE username = '$username'";
+$sql = "SELECT username, password, nickname FROM userlist WHERE username = '$username'";
 $result = $db->query($sql);
 if ($result->num_rows === 0)
     exit('<script>alert("该用户不存在!");history.back();</script>');
@@ -25,6 +26,6 @@ if ($user['password'] != $password)
     <title>留言板</title>
 </head>
 <body>
-    登录成功
+    <?php echo $username['nickname']; ?> 登录成功
 </body>
 </html>

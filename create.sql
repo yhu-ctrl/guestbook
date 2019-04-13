@@ -82,27 +82,4 @@ CREATE TABLE `userlist` (
   PRIMARY KEY (`uid`)
 );
 
-
-INSERT INTO `userlist` VALUES ('1', 'admin', 'admin', 'admin', 'null', '0', '127.0.0.1', '0', '127.0.0.1', '0', '0', '0', '0');
-INSERT INTO `userlist` VALUES ('2', 'admin1', 'e3ceb5881a0a1fdaad01296d7554868d', '111111', 'uploadfile/136979696849.jpg', '1367980003', '127.0.0.1', '1369796903', '127.0.0.1', '0', '0', '0', '0');
-INSERT INTO `userlist` VALUES ('3', 'jeky1', '96e79218965eb72c92a549dd5a330112', 'leo', './uploads/2018/04/201804121710537259.png', '1368584269', '127.0.0.1', '1369140317', '127.0.0.1', '0', '0', '1525413707', '1525413707');
-INSERT INTO `userlist` VALUES ('4', 'jeky2', '96e79218965eb72c92a549dd5a330112', 'leo2', './uploads/2018/04/201804121710537259.png', '1368584304', '127.0.0.1', '1368584304', '127.0.0.1', '0', '0', '1525406026', '1525406026');
-INSERT INTO `userlist` VALUES ('5', '1231', '202cb962ac59075b964b07152d234b70', '123', './uploads/2018/04/201804121710537259.png', null, null, null, null, '0', '0', '0', '0');
-INSERT INTO `userlist` VALUES ('6', '1234', '81dc9bdb52d04dc20036dbd8313ed055', '1234', './uploads/2018/04/201804121710537259.png', null, null, null, null, '0', '0', '0', '0');
-INSERT INTO `userlist` VALUES ('7', 'user1', '24c9e15e52afc47c225b757e7bee1f9d', 'user1', './uploads/2018/04/201804121710537259.png', null, null, null, null, '0', '0', '0', '0');
-INSERT INTO `userlist` VALUES ('19', '12', 'c20ad4d76fe97759aa27a0c99bff6710', '12', './uploads/2018/04/201804121710537259.png', '1523524253', '127.0.0.1', null, null, '0', '0', '0', '0');
-INSERT INTO `userlist` VALUES ('11', 'jeky3', '96e79218965eb72c92a549dd5a330112', 'jeky3', './uploads/2018/04/201804121710537259.png', '1522725995', '127.0.0.1', null, null, '0', '0', '1524800687', '1524800687');
-INSERT INTO `userlist` VALUES ('12', 'jeky4', '96e79218965eb72c92a549dd5a330112', 'jeky4', './uploads/2018/04/201804121710537259.png', '1522739818', '', null, null, '0', '0', '0', '0');
-INSERT INTO `userlist` VALUES ('18', '11', '6512bd43d9caa6e02c990b0a82652dca', '11', './uploads/2018/04/201804121631406436.png', '1523521900', '127.0.0.1', null, null, '0', '0', '0', '0');
-INSERT INTO `userlist` VALUES ('26', 'jeky13', '96e79218965eb72c92a549dd5a330112', 'jeky13', './uploads/2018/04/201804121631406436.png', '1524486263', '127.0.0.1', null, null, '0', '0', '0', '0');
-INSERT INTO `userlist` VALUES ('25', 'jeky12', '96e79218965eb72c92a549dd5a330112', 'jeky12', './uploads/2018/04/201804121631406436.png', '1524475719', '127.0.0.1', null, null, '0', '0', '0', '0');
-INSERT INTO `userlist` VALUES ('27', 'leo1', '96e79218965eb72c92a549dd5a330112', 'leo1', './uploads/2018/04/201804251434208378.png', '1524638060', '', null, null, '0', '0', '1524640711', '1524640710');
-INSERT INTO `userlist` VALUES ('28', 'leo2', '96e79218965eb72c92a549dd5a330112', 'leo2', './uploads/2018/04/201804121631406436.png', '1524640561', '127.0.0.1', null, null, '0', '0', '1524797056', '1524797056');
-INSERT INTO `userlist` VALUES ('29', 'jeky5', '96e79218965eb72c92a549dd5a330112', 'jeky5', './uploads/2018/04/201804121631406436.png', '1525418672', '127.0.0.1', null, null, '0', '0', '0', '0');
-INSERT INTO `userlist` VALUES ('30', 'jeky6', '96e79218965eb72c92a549dd5a330112', 'jeky6', 'uploads/2018/05/201805071737026105.png', '1525685822', '127.0.0.1', null, null, '0', '0', '0', '0');
-INSERT INTO `userlist` VALUES ('31', 'jeky7', '96e79218965eb72c92a549dd5a330112', 'jeky7', 'uploads/2018/05/201805072029297272.png', '1525696169', '127.0.0.1', null, null, '0', '0', '0', '0');
-INSERT INTO `userlist` VALUES ('73', 'leo1', '111', 'leo1', null, null, null, null, null, '0', '0', '0', '0');
-INSERT INTO `userlist` VALUES ('61', 'jeky', '96e79218965eb72c92a549dd5a330112', 'jeky', null, null, null, null, null, '0', '0', '0', '0');
-INSERT INTO `userlist` VALUES ('70', 'leo1', '111111', 'leo', null, null, null, null, null, '0', '0', '0', '0');
-INSERT INTO `userlist` VALUES ('71', 'leo1', '111', 'leo1', null, null, null, null, null, '0', '0', '0', '0');
-INSERT INTO `userlist` VALUES ('72', 'leo1', '111', 'leo1', null, null, null, null, null, '0', '0', '0', '0');
+INSERT INTO `userlist` VALUES ('1', 'admin', 'e3ceb5881a0a1fdaad01296d7554868d', '111111', 'uploadfile/136979696849.jpg', '1367980003', '127.0.0.1', '1369796903', '127.0.0.1', '0', '0', '0', '0');

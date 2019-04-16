@@ -26,6 +26,6 @@ if ($user['password'] != $password)
     <title>留言板</title>
 </head>
 <body>
-    <?php echo $username['nickname']; ?> 登录成功
+    <?php echo $user['nickname']; ?> 登录成功
 </body>
 </html>

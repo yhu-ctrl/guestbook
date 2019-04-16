@@ -17,8 +17,9 @@ require_once('config.php');
 $sql = "SELECT username FROM userlist WHERE username = '$username'";
 $result = $db->query($sql);
 if ($result->num_rows === 0) {
-    $sql = "INSERT INTO userlist(username, password, nickname)
-            VALUES ('$username', '$password', '$usernane')";
+    $sql = "INSERT INTO userlist
+            (username, password, nickname)
+            VALUES ('$username', '$password', '$username')";
     if ($res = $db->query($sql))
         exit('<script>alert("注册成功!");self.location="index.php";</script>');
     else

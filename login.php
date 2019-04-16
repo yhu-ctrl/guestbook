@@ -9,7 +9,9 @@ if(!$password)
 $password = md5($password);
 
 require_once('config.php');
-$sql = "SELECT username, password, nickname FROM userlist WHERE username = '$username'";
+$sql = "SELECT username, password, nickname
+        FROM userlist
+        WHERE username = '$username'";
 $result = $db->query($sql);
 if ($result->num_rows === 0)
     exit('<script>alert("该用户不存在!");history.back();</script>');

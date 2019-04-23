@@ -13,12 +13,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
 $uid = $_SESSION['uid'];
 
 require_once('config.php');
-$sql = "SELECT username, nickname FROM userlist WHERE uid = '$uid' ";
+$sql = "SELECT nickname FROM userlist WHERE uid = '$uid' ";
 $result = $db->query($sql);
-if ($result->num_rows === 0)
+if ($result->num_rows === 0){
+    $_SESSION = array();
     exit('<script>alert("该用户不存在!");history.back();</script>');
+}
 $user = $result->fetch_assoc();
-
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +31,7 @@ $user = $result->fetch_assoc();
     <title>留言板</title>
 </head>
 <body>
-    <?php echo $user['nickname']; ?> 登录成功
+    <?php echo $user['nickname']; ?>,登录成功
     <a href="index.php?action=logout">注销</a>
 </body>
 </html>

@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = md5($password);
 
     require_once('config.php');
-    $sql = "SELECT uid, username, password, nickname FROM userlist WHERE username = '$username'";
+    $sql = "SELECT uid, username, password FROM userlist WHERE username = '$username'";
     $result = $db->query($sql);
     if ($result->num_rows === 0)
         exit('<script>alert("该用户不存在!");history.back();</script>');

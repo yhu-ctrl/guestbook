@@ -38,7 +38,7 @@ if ($result->num_rows === 0){
 $user = $result->fetch_assoc();
 
 // 载入留言
-$sql = "SELECT nickname, addtime, comment
+$sql = "SELECT nickname, addtime, comment, headimg
         FROM guestbook
         JOIN userlist USING (uid)
         ORDER BY id ASC";
@@ -47,6 +47,7 @@ $result = $db->query($sql);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,32 +56,55 @@ $result = $db->query($sql);
     <link rel="stylesheet" href="css/icon.css">
     <title>留言板</title>
 </head>
+
 <body>
-
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-wrapper">
+            <a class="brand-logo center"><?php echo $user['nickname']; ?></a>
+            <ul id="nav-mobile" class="right">
+                <li><a href="index.php?action=logout">退出</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- 内容栏 -->
     <div class="container">
-        <h1><?php echo $user['nickname']; ?>,登录成功</h1>
-        <a href="index.php?action=logout">注销</a>
-        <form action="#" method="post">
-            <div class="input-field">
-                <textarea name="comment" id="comment" class="materialize-textarea"></textarea>
-                <label for="comment">我也要留言</label>
-                <button type="submit" class="btn">提交</button>
+        <!-- 输入留言 -->
+        <div class="row">
+            <div class="col s12">
+                <form action="#" method="post">
+                    <div class="input-field">
+                        <textarea name="comment" id="comment" class="materialize-textarea"></textarea>
+                        <label for="comment">我也要留言</label>
+                        <button type="submit" class="btn">提交</button>
+                    </div>
+                </form>
             </div>
-        </form>
-        <ul class="collection z-depth-3">
-            <?php
-            while ($guestbook = $result->fetch_assoc()) {
-                echo '<li class="collection-item avater">';
-                    echo '<span class="title">' . $guestbook['nickname'] . '<span>';
-                    echo '<p>' . $guestbook['comment'] . '</p>';
-                    echo '<span class="title">' . $guestbook['addtime'] . '<span>';
-                echo '</li>';
-            }
-            ?>
-        </ul>
-
+        </div>
+        <!-- 显示留言 -->
+        <div class="row">
+            <div class="col s12">
+                <ul class="collection z-depth-3">
+                    <?php
+                    while ($guestbook = $result->fetch_assoc()) {
+                        $hearimg = $guestbook['headimg'];
+                        if ($hearimg == '') 
+                            $hearimg = 'img/th.jpg';    // 空头像则设置默认头像
+                            
+                        echo '<li class="collection-item avater">';
+                            echo '<img src="' . $hearimg . '" width=50px alt="" class="circle">';
+                            echo '<span class="title"><b>' . $guestbook['nickname'] . '</b></span>';
+                            echo '<p>' . $guestbook['comment'] . '</p>';
+                            echo '<span class="title">' . $guestbook['addtime'] . '</span>';
+                        echo '</li>';
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <script src="js/materialize.min.js"></script>
 </body>
+
 </html>

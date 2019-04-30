@@ -13,7 +13,16 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
 $uid = $_SESSION['uid'];
 $USER_IP = $_SERVER['REMOTE_ADDR'];
 require_once('config.php');
-
+if (isset($_GET['delete'])) {
+    // 删除留言
+    $id = $_GET['delete'];
+    $sql = "DELETE FROM guestbook
+            WHERE id = '$id' AND uid = '$uid'";
+    if ($result = $db->query($sql))
+        exit('<script>alert("成功删除该留言!");self.location="index.php"</script>');
+    else
+        exit('<script>alert("无法删除!");self.location="index.php"</script>');
+}
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // 留言
     $comment = $_POST['comment'];
@@ -38,7 +47,7 @@ if ($result->num_rows === 0){
 $user = $result->fetch_assoc();
 
 // 载入留言
-$sql = "SELECT nickname, addtime, comment, headimg
+$sql = "SELECT id, uid, nickname, addtime, comment, headimg
         FROM guestbook
         JOIN userlist USING (uid)
         ORDER BY id ASC";
@@ -92,12 +101,14 @@ $result = $db->query($sql);
                             $hearimg = 'img/th.jpg';    // 空头像则设置默认头像
                             
                         echo '<li class="collection-item avatar">';
-                            echo '<img src="' . $hearimg . '" width=42 alt="" class="circle">';
+                            echo '<img src="' . $hearimg . '" alt="" class="circle">';
                             echo '<span class="title"><b>' . $guestbook['nickname'] . '</b></span>';
                             echo '<p>';
                             echo $guestbook['comment'] . '<br/>';
                             echo $guestbook['addtime'];
                             echo '</p>';
+                            if ($uid == $guestbook['uid'])
+                                echo '<a href="index.php?delete=' . $guestbook['id'] . '" class="secondary-content"><i class="material-icons">clear</i></a>';
                         echo '</li>';
                     }
                     ?>

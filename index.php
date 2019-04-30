@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             (uid, comment, ip)
             VALUES('$uid', '$comment', '$USER_IP')";
     if ($result = $db->query($sql)) {
-        exit('<script>alert("留言成功!");history.back();</script>');
+        exit('<script>alert("留言成功!");self.location="index.php"</script>');
     }
     else {
         echo $db->error ;
@@ -84,7 +84,7 @@ $result = $db->query($sql);
         <!-- 显示留言 -->
         <div class="row">
             <div class="col s12">
-                <ul class="collection z-depth-3">
+                <ul class="collection">
                     <?php
                     while ($guestbook = $result->fetch_assoc()) {
                         $hearimg = $guestbook['headimg'];
@@ -92,10 +92,12 @@ $result = $db->query($sql);
                             $hearimg = 'img/th.jpg';    // 空头像则设置默认头像
                             
                         echo '<li class="collection-item avater">';
-                            echo '<img src="' . $hearimg . '" width=50px alt="" class="circle">';
+                            echo '<img src="' . $hearimg . '" width=64 alt="" class="circle">';
                             echo '<span class="title"><b>' . $guestbook['nickname'] . '</b></span>';
-                            echo '<p>' . $guestbook['comment'] . '</p>';
-                            echo '<span class="title">' . $guestbook['addtime'] . '</span>';
+                            echo '<p>';
+                            echo $guestbook['comment'] . '<br/>';
+                            echo $guestbook['addtime'];
+                            echo '</p>';
                         echo '</li>';
                     }
                     ?>
@@ -105,6 +107,9 @@ $result = $db->query($sql);
     </div>
 
     <script src="js/materialize.min.js"></script>
+    <script>
+        M.AutoInit();
+    </script>
 </body>
 
 </html>

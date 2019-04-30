@@ -91,8 +91,8 @@ $result = $db->query($sql);
                         if ($hearimg == '') 
                             $hearimg = 'img/th.jpg';    // 空头像则设置默认头像
                             
-                        echo '<li class="collection-item avater">';
-                            echo '<img src="' . $hearimg . '" width=64 alt="" class="circle">';
+                        echo '<li class="collection-item avatar">';
+                            echo '<img src="' . $hearimg . '" width=42 alt="" class="circle">';
                             echo '<span class="title"><b>' . $guestbook['nickname'] . '</b></span>';
                             echo '<p>';
                             echo $guestbook['comment'] . '<br/>';
@@ -107,9 +107,6 @@ $result = $db->query($sql);
     </div>
 
     <script src="js/materialize.min.js"></script>
-    <script>
-        M.AutoInit();
-    </script>
 </body>
 
 </html>

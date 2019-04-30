@@ -26,16 +26,17 @@ if (isset($_GET['delete'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // 留言
     $comment = $_POST['comment'];
-    $sql = "INSERT INTO guestbook
-            (uid, comment, ip)
-            VALUES('$uid', '$comment', '$USER_IP')";
-    if ($result = $db->query($sql)) {
-        exit('<script>alert("留言成功!");self.location="index.php"</script>');
+    if ($comment != '') {
+        $sql = "INSERT INTO guestbook
+                (uid, comment, ip)
+                VALUES('$uid', '$comment', '$USER_IP')";
+        if ($result = $db->query($sql)) {
+            exit('<script>alert("留言成功!");self.location="index.php"</script>');
+        }
+        else {
+            echo $db->error ;
+        }
     }
-    else {
-        echo $db->error ;
-    }
-    
 }
 
 $sql = "SELECT nickname FROM userlist WHERE uid = '$uid' ";
@@ -108,7 +109,8 @@ $result = $db->query($sql);
                             echo $guestbook['addtime'];
                             echo '</p>';
                             if ($uid == $guestbook['uid'])
-                                echo '<a href="index.php?delete=' . $guestbook['id'] . '" class="secondary-content"><i class="material-icons">clear</i></a>';
+                                echo '<a href="index.php?delete=' . $guestbook['id'] . '" onClick="return confirm(\'确定要删除这条评论吗?\');"
+                                class="secondary-content"><i class="material-icons">clear</i></a>';
                         echo '</li>';
                     }
                     ?>

@@ -46,14 +46,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">account_circle</i>
-                    <input type="text" name="name" id="name" class="validate">
+                    <input type="text" name="name" id="name" class="validate" required>
                     <label for="name">用户名:</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">lock</i>
-                    <input type="password" name="passwd" id="passwd" class="validate">
+                    <input type="password" name="passwd" id="passwd" class="validate" required>
                     <label for="passwd">密码:</label>
                 </div>
             </div>

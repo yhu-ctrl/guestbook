@@ -38,21 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
-
-$sql = "SELECT nickname FROM userlist WHERE uid = '$uid' ";
-$result = $db->query($sql);
-if ($result->num_rows === 0){
-    $_SESSION = array();
-    exit('<script>alert("该用户不存在!");history.back();</script>');
-}
-$user = $result->fetch_assoc();
-
-// 载入留言
-$sql = "SELECT id, uid, nickname, addtime, comment, headimg
-        FROM guestbook
-        JOIN userlist USING (uid)
-        ORDER BY id ASC";
-$result = $db->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -73,7 +58,7 @@ $result = $db->query($sql);
         <div class="nav-wrapper">
             <a class="brand-logo center"><?php echo $user['nickname']; ?></a>
             <ul id="nav-mobile" class="right">
-                <li><a href="index.php?action=logout">退出</a></li>
+                <li><a href="index.php?action=logout"><i class="material-icons">exit_to_app</i></a></li>
             </ul>
         </div>
     </nav>
@@ -84,7 +69,7 @@ $result = $db->query($sql);
             <div class="col s12">
                 <form action="#" method="post">
                     <div class="input-field">
-                        <textarea name="comment" id="comment" class="materialize-textarea"></textarea>
+                        <textarea name="comment" id="comment" class="materialize-textarea" required></textarea>
                         <label for="comment">我也要留言</label>
                         <button type="submit" class="btn">提交</button>
                     </div>
@@ -94,32 +79,38 @@ $result = $db->query($sql);
         <!-- 显示留言 -->
         <div class="row">
             <div class="col s12">
-                <ul class="collection">
-                    <?php
-                    while ($guestbook = $result->fetch_assoc()) {
-                        $hearimg = $guestbook['headimg'];
-                        if ($hearimg == '') 
-                            $hearimg = 'img/th.jpg';    // 空头像则设置默认头像
-                            
-                        echo '<li class="collection-item avatar">';
-                            echo '<img src="' . $hearimg . '" alt="" class="circle">';
-                            echo '<span class="title"><b>' . $guestbook['nickname'] . '</b></span>';
-                            echo '<p>';
-                            echo $guestbook['comment'] . '<br/>';
-                            echo $guestbook['addtime'];
-                            echo '</p>';
-                            if ($uid == $guestbook['uid'])
-                                echo '<a href="index.php?delete=' . $guestbook['id'] . '" onClick="return confirm(\'确定要删除这条评论吗?\');"
-                                class="secondary-content"><i class="material-icons">clear</i></a>';
-                        echo '</li>';
-                    }
-                    ?>
+                <ul class="collection" id="guestbook">
                 </ul>
             </div>
         </div>
     </div>
 
     <script src="js/materialize.min.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script>
+        //载入留言
+        $.post({url:"query.php?action=query",
+                dataType:"json",
+                data: {'action': 'query'},
+                success:(data)=>{
+                    data.forEach(element => {
+                        let $li = $('<li class="collection-item avatar"></li>');
+                        let hearimg = element['headimg'];
+                        if (hearimg == null)
+                            hearimg = 'img/th.jpg';     //空头像则设置个默认头像
+                        $li.append('<img src="' + hearimg + '" alt="" class="circle">');
+                        $li.append('<span class="title"><b>' + element['nickname'] + '<b></span>');
+                        let $p = $('<p></p>');
+                        $p.append(element['comment'] + '<br/>');
+                        $p.append(element['addtime']);
+                        $li.append($p);
+                        
+                        $('#guestbook').append($li);
+                        
+                    });
+                }
+            });
+    </script>
 </body>
 
 </html>

@@ -17,7 +17,7 @@ if(isset($_POST['comment'])) {
             (uid, comment, ip)
             VALUES('$uid', '$comment', '$USER_IP')";
     if ($result = $db->query($sql)) {
-        exit('<script>self.location="/";</script>');
+        exit(json_encode(1));
     }
 }
 

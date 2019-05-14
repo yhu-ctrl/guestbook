@@ -25,11 +25,11 @@
         <!-- 输入留言 -->
         <div class="row">
             <div class="col s12">
-                <form action="query.php" method="post">
+                <form method="POST">
                     <div class="input-field">
                         <textarea name="comment" id="comment" class="materialize-textarea" required></textarea>
                         <label for="comment">我也要留言</label>
-                        <button type="submit" class="btn">提交</button>
+                        <button type="submit" onclick="Comment()" class="btn">提交</button>
                     </div>
                 </form>
             </div>
@@ -94,6 +94,19 @@
                     data: {'action': 'out'},
                     success:()=>{
                         location.href = 'login.php';
+                    }
+                    });
+        }
+
+        //留言
+        function Comment() {
+            $.post({url: "query.php",
+                    dataType: "json",
+                    data: $('form').serialize(),
+                    success:()=>{
+                        alert('留言成功');
+                        $('#comment').val = '';
+                        Load();
                     }
                     });
         }

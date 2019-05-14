@@ -1,45 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['uid'])) {
-    // 表示当前未登录，跳转到登录页面
-    exit('<script>self.location="login.php";</script>');
-}
-if (isset($_GET['action']) && $_GET['action'] == 'logout') {
-    // 用户退出
-    $_SESSION = array();
-    exit('<script>self.location="login.php";</script>');
-}
-
-$uid = $_SESSION['uid'];
-$USER_IP = $_SERVER['REMOTE_ADDR'];
-require_once('config.php');
-if (isset($_GET['delete'])) {
-    // 删除留言
-    $id = $_GET['delete'];
-    $sql = "DELETE FROM guestbook
-            WHERE id = '$id' AND uid = '$uid'";
-    if ($result = $db->query($sql))
-        exit('<script>alert("成功删除该留言!");self.location="index.php"</script>');
-    else
-        exit('<script>alert("无法删除!");self.location="index.php"</script>');
-}
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // 留言
-    $comment = $_POST['comment'];
-    if ($comment != '') {
-        $sql = "INSERT INTO guestbook
-                (uid, comment, ip)
-                VALUES('$uid', '$comment', '$USER_IP')";
-        if ($result = $db->query($sql)) {
-            exit('<script>alert("留言成功!");self.location="index.php"</script>');
-        }
-        else {
-            echo $db->error ;
-        }
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,9 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- 导航栏 -->
     <nav>
         <div class="nav-wrapper">
-            <a class="brand-logo center"><?php echo $user['nickname']; ?></a>
+            <a class="brand-logo center"></a>
             <ul id="nav-mobile" class="right">
-                <li><a href="index.php?action=logout"><i class="material-icons">exit_to_app</i></a></li>
+                <li><a href="#" onclick="LogOut()"><i class="material-icons">exit_to_app</i></a></li>
             </ul>
         </div>
     </nav>
@@ -67,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- 输入留言 -->
         <div class="row">
             <div class="col s12">
-                <form action="#" method="post">
+                <form action="query.php" method="post">
                     <div class="input-field">
                         <textarea name="comment" id="comment" class="materialize-textarea" required></textarea>
                         <label for="comment">我也要留言</label>
@@ -79,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- 显示留言 -->
         <div class="row">
             <div class="col s12">
-                <ul class="collection" id="guestbook">
+                <ul class="collection">
                 </ul>
             </div>
         </div>
@@ -89,27 +47,73 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script src="js/jquery-3.4.1.min.js"></script>
     <script>
         //载入留言
-        $.post({url:"query.php?action=query",
-                dataType:"json",
-                data: {'action': 'query'},
-                success:(data)=>{
-                    data.forEach(element => {
-                        let $li = $('<li class="collection-item avatar"></li>');
-                        let hearimg = element['headimg'];
-                        if (hearimg == null)
-                            hearimg = 'img/th.jpg';     //空头像则设置个默认头像
-                        $li.append('<img src="' + hearimg + '" alt="" class="circle">');
-                        $li.append('<span class="title"><b>' + element['nickname'] + '<b></span>');
-                        let $p = $('<p></p>');
-                        $p.append(element['comment'] + '<br/>');
-                        $p.append(element['addtime']);
-                        $li.append($p);
-                        
-                        $('#guestbook').append($li);
-                        
+        function Load() {
+            $.post({url:"query.php",
+                    dataType:"json",
+                    data: {'action': 'query'},
+                    success:(data)=>{
+                        $('.collection').empty();
+                        data.forEach(element => {
+                            let $li = $('<li class="collection-item avatar"></li>');
+                            let hearimg = element['headimg'];
+                            if (hearimg == null)
+                                hearimg = 'img/th.jpg';     //空头像则设置个默认头像
+                            $li.append('<img src="' + hearimg + '" alt="" class="circle">');
+                            $li.append('<span class="title"><b>' + element['nickname'] + '<b></span>');
+                            let $p = $('<p></p>');
+                            $p.append(element['comment'] + '<br/>');
+                            $p.append(element['addtime']);
+                            $li.append($p);
+                            if (element['uid'] == uid) {
+                                $li.append('<a href="#"' +
+                                            'onClick="Del(' + element['id'] + ');return false;" ' +
+                                            'class="secondary-content"><i class="material-icons">clear</i></a>');
+                            }
+                            $('.collection').append($li);
+                        });
+                    }});
+        }
+
+        //删除留言
+        function Del(id) {
+            if (!confirm("确定要删除这条留言吗？"))
+                return
+            $.post({url: "query.php",
+                    dataType:"json",
+                    data: {'action': 'del', 'id': id},
+                    success:(data)=>{
+                        alert("删除留言成功")
+                        Load();
+                    }})
+        }
+
+        //用户退出
+        function LogOut() {
+            $.post({url: "query.php",
+                    dataType: "json",
+                    data: {'action': 'out'},
+                    success:()=>{
+                        location.href = 'login.php';
+                    }
                     });
+        }
+
+        let uid, nickname;
+        //载入用户信息
+        $.post({url: "query.php",
+                dataType: "json",
+                data: {'action': 'user'},
+                success:(data)=>{
+                    uid = data['uid'];
+                    nickname = data['nickname'];
+                    $('.brand-logo.center').append(nickname);
+                },
+                error: ()=>{
+                    location.href = 'login.php';
                 }
-            });
+                });
+        Load();
+
     </script>
 </body>
 

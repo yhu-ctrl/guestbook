@@ -1,32 +1,3 @@
-<?php
-session_start();
-if (isset($_SESSION['uid'])){
-    exit('<script>self.location="/";</script>');
-}
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['name'];
-    $password = $_POST['passwd'];
-
-    if(!$username)
-        exit('<script>alert("请输入用户名!");history.back();</script>');
-    if(!$password)
-        exit('<script>alert("请输入密码!");history.back();</script>');
-    $password = md5($password);
-
-    require_once('config.php');
-    $sql = "SELECT uid, username, password FROM userlist WHERE username = '$username'";
-    $result = $db->query($sql);
-    if ($result->num_rows === 0)
-        exit('<script>alert("该用户不存在!");history.back();</script>');
-    $user = $result->fetch_assoc();
-    if ($user['password'] != $password)
-        exit('<script>alert("密码错误!");history.back();</script>');
-
-    $_SESSION['uid'] = $user['uid'];
-    exit('<script>self.location="/";</script>');
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div class="container">
         <h3>登录</h3>
-        <form action="#" method="POST">
+        <form>
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">account_circle</i>
@@ -58,13 +29,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row">
-                <button type="submit" class="btn">登录</button>
+                <button class="btn" onclick="return login()">登录</button>
                 <a href="reg.php" class="btn">注册</a>
             </div>
         </form>
     </div>
 
     <script src="js/materialize.min.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/jquery.md5.js"></script>
+    <script>
+        function login() {
+            if ($('#name').val() === '' || $('#passwd').val() === '')
+                return true;
+            $.post({url: "user.php",
+                    dataType: "json",
+                    data: {
+                        'action': 'login',
+                        'user': $('#name').val(),
+                        'passwd': $.md5($('#passwd').val())
+                        },
+                    success:(data)=>{
+                        if (data['code']) {
+                            alert("登录成功");
+                            self.location = 'index.php';
+                        }
+                        else {
+                            alert(data['msg']);
+                            $('#passwd').val('');
+                        }
+                    },
+                    error: ()=>{
+                        alert("登录失败");
+                    }
+                    });
+                return false;
+        }
+    </script>
 </body>
 
 </html>

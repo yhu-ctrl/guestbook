@@ -25,11 +25,11 @@
         <!-- 输入留言 -->
         <div class="row">
             <div class="col s12">
-                <form method="">
+                <form>
                     <div class="input-field">
                         <textarea name="comment" id="comment" class="materialize-textarea" required></textarea>
                         <label for="comment">我也要留言</label>
-                        <button type="submit" onclick="return Comment();" class="btn">提交</button>
+                        <button onclick="retuen Comment();" class="btn">提交</button>
                     </div>
                 </form>
             </div>

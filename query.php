@@ -1,4 +1,7 @@
 <?php
+//管理留言板内容
+//
+
 header('Content-Type:text/json;charset=utf-8');
 session_start();
 
@@ -24,15 +27,7 @@ if(isset($_POST['comment'])) {
 //其他操作
 if(isset($_POST['action'])) {
     $action = $_POST['action'];
-    if ($action == 'user') {
-        //查询用户信息
-        $sql = "SELECT uid, nickname
-                FROM userlist
-                WHERE uid='$uid'";
-        $result = $db->query($sql);
-        exit(json_encode($result->fetch_assoc()));
-    }
-    else if ($action == 'query') {
+    if ($action == 'query') {
         //查询留言
         $sql = "SELECT id, uid, nickname, addtime, comment, headimg
                 FROM guestbook
@@ -43,11 +38,6 @@ if(isset($_POST['action'])) {
             $rows[] = $row;
         }
         exit(json_encode($rows));
-    }
-    else if ($action == 'out') {
-        //用户注销
-        $_SESSION = array();
-        exit(json_encode(1));
     }
     else if ($action == 'del') {
         //删除留言

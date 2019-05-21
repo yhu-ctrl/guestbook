@@ -25,11 +25,11 @@
         <!-- 输入留言 -->
         <div class="row">
             <div class="col s12">
-                <form method="POST">
+                <form method="">
                     <div class="input-field">
                         <textarea name="comment" id="comment" class="materialize-textarea" required></textarea>
                         <label for="comment">我也要留言</label>
-                        <button type="submit" onclick="Comment()" class="btn">提交</button>
+                        <button type="submit" onclick="return Comment();" class="btn">提交</button>
                     </div>
                 </form>
             </div>
@@ -89,7 +89,7 @@
 
         //用户退出
         function LogOut() {
-            $.post({url: "query.php",
+            $.post({url: "user.php",
                     dataType: "json",
                     data: {'action': 'out'},
                     success:()=>{
@@ -100,20 +100,23 @@
 
         //留言
         function Comment() {
+            if ($('#comment').val() === '')
+                return true;
             $.post({url: "query.php",
                     dataType: "json",
                     data: $('form').serialize(),
                     success:()=>{
                         alert('留言成功');
-                        $('#comment').val = '';
+                        $('#comment').val('');
                         Load();
                     }
                     });
+            return false;
         }
 
         let uid, nickname;
         //载入用户信息
-        $.post({url: "query.php",
+        $.post({url: "user.php",
                 dataType: "json",
                 data: {'action': 'user'},
                 success:(data)=>{

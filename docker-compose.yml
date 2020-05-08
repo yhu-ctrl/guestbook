@@ -2,12 +2,14 @@ version: '3'
 
 services: 
     webapp:
-        image: php:7-apache
+        build: .
         volumes:
-            - .:/var/www/html/
+            - .:/var/www/html/:ro
         depends_on:
             - db
         ports:
             - "8000:80"
     db:
-        build: .
+        build: sql/
+        environment: 
+            MYSQL_ROOT_PASSWORD: guestbook

@@ -1,8 +1,8 @@
 CREATE DATABASE IF NOT EXISTS guestbook;
+
 USE guestbook;
 
-DROP TABLE IF EXISTS 'chart';
-CREATE TABLE 'chart' (
+CREATE TABLE IF NOT EXISTS 'chart' (
   'id' INT NOT NULL AUTO_INCREMENT,
   'uid' INT DEFAULT NULL,
   'content' TEXT,
@@ -10,8 +10,7 @@ CREATE TABLE 'chart' (
   PRIMARY KEY ('id')
 );
 
-DROP TABLE IF EXISTS 'guestbook';
-CREATE TABLE 'guestbook' (
+CREATE TABLE IF NOT EXISTS 'guestbook' (
   'id' INT NOT NULL AUTO_INCREMENT,
   'uid' INT NOT NULL,
   'comment' TEXT NOT NULL,
@@ -22,8 +21,7 @@ CREATE TABLE 'guestbook' (
   KEY 'uid' ('uid')
 );
 
-DROP TABLE IF EXISTS 'userlist';
-CREATE TABLE 'userlist' (
+CREATE TABLE IF NOT EXISTS 'userlist' (
   'uid' INT NOT NULL AUTO_INCREMENT,
   'username' VARCHAR(20) NOT NULL,
   'password' char(32) NOT NULL,

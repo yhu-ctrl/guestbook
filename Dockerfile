@@ -1,4 +1,3 @@
-FROM mariadb
+FROM php:7-apache
 
-ENV MYSQL_ROOT_PASSWORD guestbook
-COPY create.sql /docker-entrypoint-initdb.d/
+RUN docker-php-ext-install mysqli

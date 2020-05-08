@@ -1,6 +1,6 @@
 <?php
 define('_DBHOST_', 'db');
-// define('_DBUSER_', 'guestbook');
+define('_DBUSER_', 'root');
 define('_DBPASS_', 'guestbook');
 define('_DBNAME_', 'guestbook');
 $db = new mysqli(_DBHOST_, _DBUSER_, _DBPASS_, _DBNAME_);
